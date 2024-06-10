@@ -7,7 +7,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $senha = $_POST['senha'];
 
     try{
-        $stmt = $conn->prepare("SELECT * FROM usuario WHERE email = :email");
+        $stmt = $conn->prepare("SELECT * FROM usuarios WHERE email = :email");
         $stmt->bindParam(':email',$email);
         $stmt->execute();
         $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
