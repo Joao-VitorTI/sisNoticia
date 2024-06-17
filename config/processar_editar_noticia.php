@@ -1,7 +1,7 @@
 <?php
 // Inclui o arquivo de configuração e conexão com o banco de dados
 require_once('../config/database.php');
- 
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Recebe os dados do formulário
     $noticia_id = $_POST['id'];
@@ -19,22 +19,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $uploadPath = $uploadDir . $nova_imagem;
  
         move_uploaded_file($_FILES['imagem']['tmp_name'], $uploadPath);
- 
+
         // Atualiza a imagem no banco de dados
-        $sqlUpdateImagem = "UPDATE noticia SET imagem = :imagem WHERE id = :id";
+        $sqlUpdateImagem = "UPDATE noticias SET imagem = :imagem WHERE id = :id";
         $stmtUpdateImagem = $conn->prepare($sqlUpdateImagem);
         $stmtUpdateImagem->bindParam(':imagem', $nova_imagem);
         $stmtUpdateImagem->bindParam(':id', $noticia_id);
         $stmtUpdateImagem->execute();
- 
+
         // Remove a imagem anterior, se existir
         if (!empty($imagem_atual) && file_exists($uploadDir . $imagem_atual)) {
             unlink($uploadDir . $imagem_atual);
         }
     }
- 
+
     // Atualiza os outros campos da notícia
-    $sql = "UPDATE noticia SET titulo = :titulo, noticia = :noticia WHERE id = :id";
+    $sql = "UPDATE noticias SET titulo = :titulo, noticia = :noticia WHERE id = :id";
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(':titulo', $titulo);
     $stmt->bindParam(':noticia', $noticia);

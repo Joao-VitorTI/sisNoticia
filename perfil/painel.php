@@ -1,16 +1,16 @@
 <?php
 session_start();
-// Verifica se o usuário está logado
+// Verifica se os usuário está logado
 if(!isset($_SESSION["usuario_id"])){
     // Se Sessão com Login não existir
-    header("Location: ../index.php");// Redireciona para index
+    header("Location: ../index.php"); //Redireciona para index
     exit();
 }
 
 // Busca no banco de dados as noticias
 try{
     require_once('../config/database.php');
-    $sql = "Select * from noticia";
+    $sql = "Select * from noticias";
     $resul = $conn->query($sql);
 }catch(PDOException $e){
     echo "Erro no banco de dados".$e->getMessage();
@@ -18,22 +18,22 @@ try{
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
 <body>
-    <!-- Construir local para trazer os dados do banco -->
+    <!-- Construir local pra trazer os dados banco -->
     <div>
         <h2>Painel do Usuário</h2>
         <p>
-            Bem Vindo,<?php echo $_SESSION["usuario_nome"];?>
+            Bem vindo, <?php echo $_SESSION["usuario_nome"]; ?>
         </p>
         <p>
             <a href="../config/logout.php">Sair</a>
-            <a href="cadastrar_noticia.php">Cad Noticia</a>
+            <a href="cadastrar_noticia.php">Cadastrar Noticias</a>
         </p>
         <hr>
         <h3>Noticias : </h3>
@@ -52,7 +52,6 @@ try{
                 echo "</li><br><hr>";
             }
             ?>
-        </ul>
     </div>
 </body>
 </html>

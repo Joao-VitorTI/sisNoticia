@@ -3,7 +3,7 @@ require_once("../config/database.php");
 
 $noticia_id = $_GET['id'];
 
-$sql = "Select * from noticia where id = :noticia_id";
+$sql = "Select * from noticias where id = :noticia_id";
 $stmt = $conn->prepare($sql);
 $stmt->bindParam(":noticia_id", $noticia_id, PDO::PARAM_INT);
 $stmt->execute();
@@ -14,7 +14,7 @@ if(!$row){
 }
 ?>
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
  
 <head>
     <meta charset="UTF-8">
