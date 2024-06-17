@@ -1,13 +1,14 @@
 <?php
 include 'database.php';
 
-if($_SERVER['REQUEST_METHOD'] == 'POST'){
+if($_SERVER['REQUEST_METHOD'] == 'POST')
+{
     // Coleta os dados do formulário
     $email = $_POST['email'];
     $senha = $_POST['senha'];
 
     try{
-        $stmt = $conn->prepare("SELECT * FROM usuarios WHERE email = :email");
+        $stmt = $conn->prepare("SELECT * FROM usuario WHERE email = :email");
         $stmt->bindParam(':email',$email);
         $stmt->execute();
         $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -23,6 +24,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             header('Location: ../index.php?erro=1');
         }
     }catch(PDOException $e){
-        echo "Erro ao Processar o Login :".$e->getMessage();
+        echo "Erro ao Processar o login :".$e->getMessage();
     }
 }
